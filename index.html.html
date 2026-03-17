@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AdmissãoAuto — Onboarding do Futuro</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@400;600;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g0:#000a00;--g1:#001400;--g2:#002800;
+  --lime:#39ff14;--lime2:#7fff00;--lime3:#4de94c;
+  --acid:#b5ff00;--glow:#39ff1455;
+  --amber:#ff6b00;--steel:#1a2a1a;--wire:#2a4a2a;
+  --text:#c8ffb0;--muted:#557755;
+  --fh:'Barlow Condensed',sans-serif;
+  --fm:'Share Tech Mono',monospace;
+  --fb:'Rajdhani',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--g0);color:var(--text);font-family:var(--fb);overflow-x:hidden;cursor:none}
+#cursor{position:fixed;width:20px;height:20px;border:1px solid var(--lime);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s;mix-blend-mode:difference}
+#cdot{position:fixed;width:4px;height:4px;background:var(--lime);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+#bgc{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:.6}
+body::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,20,0,.12) 2px,rgba(0,20,0,.12) 4px);pointer-events:none;z-index:1}
+nav{position:fixed;top:0;width:100%;z-index:100;padding:.9rem 2.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--wire);background:rgba(0,10,0,.92);backdrop-filter:blur(10px)}
+.nlogo{font-family:var(--fh);font-size:1.6rem;font-weight:900;color:var(--lime);letter-spacing:2px;text-transform:uppercase;text-shadow:0 0 20px var(--lime)}
+.nlogo em{color:var(--amber);font-style:normal}
+.nlinks{display:flex;gap:2rem;list-style:none}
+.nlinks a{color:var(--muted);text-decoration:none;font-family:var(--fm);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;transition:color .2s}
+.nlinks a:hover{color:var(--lime);text-shadow:0 0 10px var(--lime)}
+.ncta{background:transparent;border:1px solid var(--lime);color:var(--lime);padding:.5rem 1.5rem;font-family:var(--fm);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;cursor:none;transition:all .2s;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+.ncta:hover{background:var(--lime);color:#000;box-shadow:0 0 30px var(--glow)}
+.marquee-bar{overflow:hidden;border-top:1px solid var(--wire);border-bottom:1px solid var(--wire);padding:.65rem 0;position:fixed;top:57px;width:100%;z-index:99;background:rgba(0,5,0,.95)}
+.marquee-t{display:flex;gap:3rem;animation:mq 22s linear infinite;white-space:nowrap}
+.mqi{font-family:var(--fm);font-size:.68rem;color:var(--muted);letter-spacing:3px;text-transform:uppercase;flex-shrink:0}
+.mqi em{color:var(--lime);font-style:normal;margin-right:2.5rem}
+@keyframes mq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+section{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:7rem 4rem 4rem}
+/* HERO */
+#hero{padding-top:9rem;overflow:hidden}
+.htag{font-family:var(--fm);font-size:.68rem;color:var(--lime);letter-spacing:4px;text-transform:uppercase;margin-bottom:1rem;opacity:0;animation:fu .6s .2s forwards}
+.htitle{font-family:var(--fh);font-size:clamp(3.5rem,9vw,8.5rem);font-weight:900;line-height:.9;text-transform:uppercase;letter-spacing:-2px;margin-bottom:1.5rem}
+.htitle .l1{display:block;color:#fff;opacity:0;animation:fu .7s .4s forwards}
+.htitle .l2{display:block;color:var(--lime);text-shadow:0 0 40px var(--glow),0 0 80px var(--glow);opacity:0;animation:fu .7s .6s forwards}
+.htitle .l3{display:block;color:transparent;-webkit-text-stroke:1px var(--wire);opacity:0;animation:fu .7s .8s forwards}
+.hsub{max-width:560px;font-size:1.05rem;color:var(--muted);line-height:1.75;margin-bottom:2.5rem;opacity:0;animation:fu .7s 1s forwards}
+.hbtns{display:flex;gap:1rem;align-items:center;opacity:0;animation:fu .7s 1.2s forwards}
+.btn-p{background:var(--lime);color:#000;padding:.9rem 2.5rem;font-family:var(--fh);font-size:1rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;border:none;cursor:none;clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);transition:all .25s;text-decoration:none;display:inline-block}
+.btn-p:hover{background:var(--acid);box-shadow:0 0 50px var(--glow);transform:translateY(-2px)}
+.btn-g{color:var(--muted);font-family:var(--fm);font-size:.78rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:color .2s}
+.btn-g:hover{color:var(--lime)}
+.hstats{position:absolute;right:4rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:2rem;opacity:0;animation:fi 1s 1.4s forwards}
+.sitem{text-align:right;border-right:2px solid var(--lime);padding-right:1rem}
+.snum{font-family:var(--fh);font-size:3rem;font-weight:900;color:var(--lime);line-height:1;text-shadow:0 0 20px var(--glow)}
+.slbl{font-family:var(--fm);font-size:.62rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+.hline{position:absolute;bottom:0;left:0;width:100%;height:1px;background:linear-gradient(90deg,transparent 0%,var(--lime) 50%,transparent 100%);animation:scanH 4s linear infinite}
+@keyframes scanH{0%{background-position:-100% 0}100%{background-position:100% 0}}
+.scroll-h{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-family:var(--fm);font-size:.62rem;color:var(--muted);letter-spacing:4px;display:flex;flex-direction:column;align-items:center;gap:.5rem;animation:pp 2s ease-in-out infinite}
+@keyframes pp{0%,100%{opacity:.3}50%{opacity:1}}
+.sarrow{width:1px;height:40px;background:linear-gradient(180deg,var(--lime),transparent);animation:sd 2s ease-in-out infinite}
+@keyframes sd{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+/* GLITCH */
+.glitch{position:relative}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%}
+.glitch::before{color:var(--amber);clip-path:polygon(0 30%,100% 30%,100% 50%,0 50%);animation:g1 5s infinite}
+.glitch::after{color:#00f5ff;clip-path:polygon(0 62%,100% 62%,100% 78%,0 78%);animation:g2 5s infinite}
+@keyframes g1{0%,89%,100%{transform:none;opacity:0}91%{transform:translateX(-3px);opacity:.8}93%{transform:translateX(3px);opacity:.8}95%{opacity:0}}
+@keyframes g2{0%,87%,100%{transform:none;opacity:0}89%{transform:translateX(4px);opacity:.7}92%{transform:translateX(-3px);opacity:.7}94%{opacity:0}}
+@keyframes fu{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+/* REVEAL */
+.rv{opacity:0;transform:translateY(40px);transition:opacity .8s,transform .8s}
+.rv.vis{opacity:1;transform:translateY(0)}
+.rvl{opacity:0;transform:translateX(-50px);transition:opacity .8s,transform .8s}
+.rvl.vis{opacity:1;transform:translateX(0)}
+.rvr{opacity:0;transform:translateX(50px);transition:opacity .8s,transform .8s}
+.rvr.vis{opacity:1;transform:translateX(0)}
+/* SECTION LABELS */
+.stag{font-family:var(--fm);font-size:.62rem;color:var(--lime);letter-spacing:4px;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:.75rem}
+.stag::before{content:'';display:inline-block;width:28px;height:1px;background:var(--lime)}
+.stitle{font-family:var(--fh);font-size:clamp(2.5rem,5vw,4.5rem);font-weight:900;text-transform:uppercase;line-height:.93;letter-spacing:-1px;color:#fff;margin-bottom:1rem}
+.stitle span{color:var(--lime);text-shadow:0 0 30px var(--glow)}
+/* HOW */
+#how{background:linear-gradient(180deg,transparent,var(--g1) 15%,var(--g1) 85%,transparent);padding:6rem 4rem}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:3.5rem;background:var(--wire)}
+.sc{background:var(--g1);padding:2.5rem 2rem;position:relative;overflow:hidden;transition:background .3s}
+.sc:hover{background:var(--g2)}
+.sc::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--lime),transparent);transform:scaleX(0);transform-origin:left;transition:transform .4s}
+.sc:hover::before{transform:scaleX(1)}
+.sn{font-family:var(--fh);font-size:5rem;font-weight:900;color:var(--wire);line-height:1;position:absolute;top:.25rem;right:.75rem;transition:color .3s}
+.sc:hover .sn{color:var(--g2)}
+.si{font-size:2rem;margin-bottom:.75rem}
+.st{font-family:var(--fh);font-size:1.25rem;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:1px;margin-bottom:.6rem}
+.sd{font-size:.88rem;color:var(--muted);line-height:1.65}
+/* FEATURES */
+#features{padding:6rem 4rem}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:3rem;background:var(--wire)}
+.fc{background:var(--g0);padding:3rem;position:relative;overflow:hidden;transition:background .3s}
+.fc:hover{background:var(--g1)}
+.fc.featured{grid-column:span 2;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;background:var(--g1)}
+.fiw{width:54px;height:54px;border:1px solid var(--wire);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1.5rem;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);position:relative}
+.fiw::after{content:'';position:absolute;inset:0;background:var(--glow);opacity:0;transition:opacity .3s}
+.fc:hover .fiw::after{opacity:1}
+.ft{font-family:var(--fh);font-size:1.35rem;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:1px;margin-bottom:.7rem}
+.fdesc{color:var(--muted);line-height:1.7;font-size:.93rem}
+.fmet{margin-top:1.5rem;font-family:var(--fm);font-size:.68rem;color:var(--lime);letter-spacing:1.5px}
+.term{background:#000;border:1px solid var(--wire);padding:1.5rem;font-family:var(--fm);font-size:.78rem;color:var(--lime);line-height:1.9;position:relative;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%)}
+.term::before{content:'● ● ●';position:absolute;top:.5rem;left:.75rem;font-size:.6rem;letter-spacing:6px;color:var(--wire)}
+.tl{display:flex;gap:.5rem;margin-top:.2rem}
+.tp{color:var(--lime);flex-shrink:0}.tc{color:#fff}.tok{color:#4de94c}.terr{color:var(--amber)}.tdim{color:var(--muted)}
+.tcursor::after{content:'█';animation:bl .8s step-end infinite}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:0}}
+/* GROWTH */
+#growth{padding:6rem 4rem;background:var(--g1)}
+.cc{height:280px;position:relative;border-left:1px solid var(--wire);border-bottom:1px solid var(--wire)}
+.csvg{width:100%;height:100%}
+.cgl{stroke:var(--wire);stroke-dasharray:4,4}
+.clp{stroke:var(--lime);stroke-width:2.5;fill:none;stroke-linecap:round;stroke-dasharray:1200;stroke-dashoffset:1200;transition:stroke-dashoffset 2.2s ease}
+.clp.anim{stroke-dashoffset:0}
+.cap{fill:url(#ag);opacity:0;transition:opacity 1.8s 1s}
+.cap.anim{opacity:1}
+.cdot{fill:var(--lime);filter:drop-shadow(0 0 6px var(--lime));opacity:0;transition:opacity .3s}
+.cdot.anim{opacity:1}
+.clbl{font-family:var(--fm);font-size:.6rem;fill:var(--muted)}
+.bars{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;align-items:end;height:200px;margin-top:1.5rem}
+.bar{background:linear-gradient(180deg,var(--lime),var(--g2));border-top:2px solid var(--lime);box-shadow:0 0 8px var(--glow);transform:scaleY(0);transform-origin:bottom;transition:transform 1.2s ease}
+.bar.anim{transform:scaleY(1)}
+.cstats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:1px;background:var(--wire)}
+.cst{background:var(--g1);padding:1.5rem;text-align:center}
+.csn{font-family:var(--fh);font-size:2.5rem;font-weight:900;color:var(--lime);text-shadow:0 0 20px var(--glow);display:block;font-variant-numeric:tabular-nums}
+.csl{font-family:var(--fm);font-size:.6rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+/* PRICING */
+#pricing{padding:6rem 4rem}
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:3rem;background:var(--wire)}
+.pc{background:var(--g0);padding:3rem 2.5rem;position:relative;overflow:hidden;transition:background .3s}
+.pc.fp{background:var(--g1);border-top:2px solid var(--lime)}
+.pc.fp::before{content:'MAIS POPULAR';position:absolute;top:1rem;right:1rem;font-family:var(--fm);font-size:.58rem;color:var(--lime);letter-spacing:3px;border:1px solid var(--lime);padding:2px 8px}
+.ptag{font-family:var(--fm);font-size:.62rem;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:.6rem}
+.pname{font-family:var(--fh);font-size:2rem;font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:2px;margin-bottom:1.5rem}
+.pprice{display:flex;align-items:baseline;gap:.2rem;margin-bottom:.4rem}
+.pcur{font-family:var(--fm);font-size:.85rem;color:var(--muted);margin-top:.4rem}
+.pamt{font-family:var(--fh);font-size:3.8rem;font-weight:900;color:var(--lime);line-height:1;text-shadow:0 0 20px var(--glow)}
+.pper{font-family:var(--fm);font-size:.68rem;color:var(--muted);letter-spacing:2px}
+.pdesc{font-size:.85rem;color:var(--muted);margin-bottom:1.75rem;line-height:1.65;padding-bottom:1.25rem;border-bottom:1px solid var(--wire)}
+.pf{list-style:none;display:flex;flex-direction:column;gap:.7rem;margin-bottom:2rem}
+.pf li{font-family:var(--fm);font-size:.73rem;color:var(--text);letter-spacing:.3px;display:flex;align-items:center;gap:.7rem}
+.pf li::before{content:'>';color:var(--lime);flex-shrink:0}
+.pf li.off{color:var(--wire)}.pf li.off::before{color:var(--wire)}
+.pbtn{width:100%;padding:.95rem;font-family:var(--fh);font-size:1rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;background:transparent;border:1px solid var(--muted);color:var(--muted);cursor:none;transition:all .25s;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+.pbtn:hover,.pc.fp .pbtn{background:var(--lime);border-color:var(--lime);color:#000;box-shadow:0 0 30px var(--glow)}
+/* TESTIMONIALS */
+#testi{padding:6rem 4rem;background:var(--g1)}
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:3rem;background:var(--wire)}
+.tc2{background:var(--g0);padding:2.5rem;position:relative}
+.tc2::before{content:'"';font-family:var(--fh);font-size:6rem;color:var(--wire);position:absolute;top:-.5rem;left:1.5rem;line-height:1}
+.ttxt{font-size:.93rem;color:var(--text);line-height:1.8;margin-bottom:1.5rem;font-style:italic;position:relative;z-index:1}
+.tauth{display:flex;align-items:center;gap:.75rem}
+.tav{width:40px;height:40px;background:var(--wire);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-size:.72rem;color:var(--lime);font-weight:700}
+.tname{font-family:var(--fh);font-size:1rem;font-weight:700;color:#fff;text-transform:uppercase}
+.trole{font-family:var(--fm);font-size:.62rem;color:var(--muted);letter-spacing:.5px}
+.tstars{color:var(--lime);font-size:.72rem;letter-spacing:2px;margin-bottom:.5rem}
+/* CTA */
+#cta{padding:6rem 4rem;text-align:center;position:relative;overflow:hidden;background:var(--g2)}
+#cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,var(--glow) 0%,transparent 70%);animation:bth 4s ease-in-out infinite}
+@keyframes bth{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.3);opacity:1}}
+.ctitle{font-family:var(--fh);font-size:clamp(2.8rem,6vw,6rem);font-weight:900;text-transform:uppercase;color:#fff;line-height:.93;margin-bottom:1.5rem;position:relative;z-index:1}
+.ctitle span{color:var(--lime);display:block;text-shadow:0 0 40px var(--glow)}
+.csub{font-size:1.05rem;color:var(--muted);margin-bottom:3rem;position:relative;z-index:1}
+.cform{display:flex;max-width:480px;margin:0 auto;position:relative;z-index:1}
+.cinp{flex:1;background:#000;border:1px solid var(--wire);border-right:none;padding:1rem 1.25rem;font-family:var(--fm);font-size:.83rem;color:var(--lime);outline:none;transition:border-color .2s}
+.cinp:focus{border-color:var(--lime)}
+.cinp::placeholder{color:var(--muted)}
+.csub2{background:var(--lime);border:none;padding:1rem 1.75rem;font-family:var(--fh);font-size:1rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:none;color:#000;transition:all .2s}
+.csub2:hover{background:var(--acid);box-shadow:0 0 30px var(--glow)}
+footer{padding:2.5rem 4rem;border-top:1px solid var(--wire);display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;position:relative;z-index:2}
+.flogo{font-family:var(--fh);font-size:1.4rem;font-weight:900;color:var(--lime);text-transform:uppercase;letter-spacing:3px}
+.fcp{font-family:var(--fm);font-size:.62rem;color:var(--muted);letter-spacing:1px}
+/* CHATBOT */
+#cb{position:fixed;bottom:2rem;right:2rem;z-index:200}
+.ctog{width:56px;height:56px;background:var(--lime);border:none;cursor:none;display:flex;align-items:center;justify-content:center;font-size:1.3rem;clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);box-shadow:0 0 30px var(--glow);animation:cp 3s ease-in-out infinite;transition:all .2s}
+.ctog:hover{transform:scale(1.1)}
+@keyframes cp{0%,100%{box-shadow:0 0 20px var(--glow)}50%{box-shadow:0 0 60px var(--glow),0 0 100px var(--glow)}}
+.cwin{position:absolute;bottom:70px;right:0;width:350px;background:#000;border:1px solid var(--wire);clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,0 100%);display:none;flex-direction:column;box-shadow:0 0 40px rgba(57,255,20,.12)}
+.cwin.open{display:flex}
+.chdr{background:var(--g2);padding:1rem 1.25rem;border-bottom:1px solid var(--wire);display:flex;align-items:center;gap:.75rem}
+.cst2{width:8px;height:8px;background:var(--lime);border-radius:50%;animation:pp 2s ease-in-out infinite}
+.cname{font-family:var(--fh);font-size:1rem;font-weight:700;color:var(--lime);text-transform:uppercase;letter-spacing:2px}
+.crole{font-family:var(--fm);font-size:.6rem;color:var(--muted)}
+.cmsgs{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.7rem;max-height:260px;scrollbar-width:thin;scrollbar-color:var(--wire) #000}
+.msg{max-width:86%;padding:.6rem 1rem;font-family:var(--fm);font-size:.73rem;line-height:1.55}
+.msg.bot{background:var(--g2);color:var(--text);align-self:flex-start;clip-path:polygon(0 0,100% 0,100% 100%,8px 100%,0 calc(100% - 8px))}
+.msg.user{background:var(--lime);color:#000;align-self:flex-end;font-weight:600;clip-path:polygon(0 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%)}
+.msg.typing::after{content:'...';animation:dt 1.2s steps(3,end) infinite}
+@keyframes dt{0%,100%{content:'.'}33%{content:'..'}66%{content:'...'}}
+.csugg{display:flex;flex-wrap:wrap;gap:.4rem;padding:.5rem 1rem;border-top:1px solid var(--wire)}
+.sugg{background:transparent;border:1px solid var(--wire);color:var(--muted);font-family:var(--fm);font-size:.63rem;padding:.3rem .6rem;cursor:none;transition:all .2s}
+.sugg:hover{border-color:var(--lime);color:var(--lime)}
+.cinw{display:flex;border-top:1px solid var(--wire)}
+.cinput{flex:1;background:transparent;border:none;padding:.75rem 1rem;font-family:var(--fm);font-size:.73rem;color:var(--lime);outline:none}
+.cinput::placeholder{color:var(--wire)}
+.csend{background:var(--lime);border:none;width:44px;color:#000;font-size:1rem;cursor:none;transition:background .2s}
+.csend:hover{background:var(--acid)}
+</style>
+</head>
+<body>
+<canvas id="bgc"></canvas>
+<div id="cursor"></div>
+<div id="cdot"></div>
+
+<nav>
+  <div class="nlogo">Admissão<em>Auto</em></div>
+  <ul class="nlinks">
+    <li><a href="#how">Como funciona</a></li>
+    <li><a href="#features">Recursos</a></li>
+    <li><a href="#growth">Métricas</a></li>
+    <li><a href="#pricing">Preços</a></li>
+  </ul>
+  <button class="ncta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Acesso grátis</button>
+</nav>
+
+<div class="marquee-bar">
+  <div class="marquee-t">
+    <span class="mqi"><em>✓</em>ZERO CHAMADOS À TI</span>
+    <span class="mqi"><em>⚡</em>SETUP EM 4 MINUTOS</span>
+    <span class="mqi"><em>◈</em>6 SISTEMAS INTEGRADOS</span>
+    <span class="mqi"><em>✓</em>98% TAXA DE SUCESSO</span>
+    <span class="mqi"><em>⚡</em>PROVISIONING PARALELO</span>
+    <span class="mqi"><em>◈</em>AD · GOOGLE · SLACK · JIRA</span>
+    <span class="mqi"><em>✓</em>ZERO CHAMADOS À TI</span>
+    <span class="mqi"><em>⚡</em>SETUP EM 4 MINUTOS</span>
+    <span class="mqi"><em>◈</em>6 SISTEMAS INTEGRADOS</span>
+    <span class="mqi"><em>✓</em>98% TAXA DE SUCESSO</span>
+    <span class="mqi"><em>⚡</em>PROVISIONING PARALELO</span>
+    <span class="mqi"><em>◈</em>AD · GOOGLE · SLACK · JIRA</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="htag">// sistema de automação de admissões — build v3.0.0</div>
+  <h1 class="htitle">
+    <span class="l1">O ONBOARDING</span>
+    <span class="l2 glitch" data-text="DO FUTURO">DO FUTURO</span>
+    <span class="l3">CHEGOU.</span>
+  </h1>
+  <p class="hsub">Elimine 100% dos chamados manuais à TI. Provisione novos colaboradores em 6 sistemas simultaneamente em menos de 5 minutos — automático, auditável, sem erros.</p>
+  <div class="hbtns">
+    <a href="#cta" class="btn-p">Começar grátis →</a>
+    <a href="#how" class="btn-g">▶ Ver como funciona</a>
+  </div>
+  <div class="hstats">
+    <div class="sitem rvr" style="transition-delay:.1s">
+      <div class="snum"><span class="counter" data-target="99">0</span>%</div>
+      <div class="slbl">Mais rápido</div>
+    </div>
+    <div class="sitem rvr" style="transition-delay:.25s">
+      <div class="snum"><span class="counter" data-target="70">0</span>+</div>
+      <div class="slbl">Chamados/mês evitados</div>
+    </div>
+    <div class="sitem rvr" style="transition-delay:.4s">
+      <div class="snum"><span class="counter" data-target="6">0</span></div>
+      <div class="slbl">Sistemas integrados</div>
+    </div>
+  </div>
+  <div class="hline"></div>
+  <div class="scroll-h"><span>SCROLL</span><div class="sarrow"></div></div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="rv">
+    <div class="stag">// fluxo operacional</div>
+    <h2 class="stitle">COMO FUNCIONA<br><span>EM 4 PASSOS</span></h2>
+  </div>
+  <div class="steps">
+    <div class="sc rv" style="transition-delay:.1s"><div class="sn">01</div><div class="si">📋</div><div class="st">RH Preenche</div><p class="sd">Um único formulário inteligente de 4 etapas. Dados pessoais, cargo, departamento e sistemas necessários. Sem planilhas, sem e-mails.</p></div>
+    <div class="sc rv" style="transition-delay:.2s"><div class="sn">02</div><div class="si">🧠</div><div class="st">Sistema Decide</div><p class="sd">Algoritmo seleciona automaticamente os sistemas e permissões com base no cargo. Dev recebe GitHub; Designer recebe Figma. Zero configuração manual.</p></div>
+    <div class="sc rv" style="transition-delay:.3s"><div class="sn">03</div><div class="si">⚡</div><div class="st">Provisioning</div><p class="sd">Contas criadas em paralelo em todos os sistemas em menos de 5 minutos. AD, Google, Slack, Jira, RH e VPN ao mesmo tempo.</p></div>
+    <div class="sc rv" style="transition-delay:.4s"><div class="sn">04</div><div class="si">✅</div><div class="st">Colaborador Ativo</div><p class="sd">Novo colaborador recebe credenciais e está 100% operacional no primeiro dia. Sem espera. Sem chamados. Sem TI.</p></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="rv">
+    <div class="stag">// capacidades do sistema</div>
+    <h2 class="stitle">TECNOLOGIA QUE<br><span>TRABALHA POR VOCÊ</span></h2>
+  </div>
+  <div class="fg">
+    <div class="fc featured rv">
+      <div>
+        <div class="fiw">⚡</div>
+        <div class="ft">Provisioning Paralelo em Tempo Real</div>
+        <p class="fdesc">Enquanto o RH tomava café esperando a TI, nosso orquestrador dispara requisições simultâneas para Active Directory, Google Workspace, Slack, Jira, Sistema de RH e VPN ao mesmo tempo. Resultado: 3 minutos e 42 segundos em média.</p>
+        <div class="fmet">> TEMPO MÉDIO: 3 MIN 42 S · UPTIME: 99.97% · ERROS: &lt;2%</div>
+      </div>
+      <div class="term" style="margin-top:0">
+        <div style="margin-top:1.5rem">
+          <div class="tl"><span class="tp">$</span><span class="tc"> admissao run --user="marcos.ferreira"</span></div>
+          <div class="tl"><span class="tdim">[00:00] Iniciando provisioning paralelo...</span></div>
+          <div class="tl"><span class="tok">[00:12] ✓ Active Directory — conta criada</span></div>
+          <div class="tl"><span class="tok">[00:28] ✓ Google Workspace — email+drive</span></div>
+          <div class="tl"><span class="tok">[00:41] ✓ Slack — invite + canais do time</span></div>
+          <div class="tl"><span class="tok">[01:05] ✓ Jira — conta + projeto padrão</span></div>
+          <div class="tl"><span class="tok">[01:18] ✓ Sistema RH — ficha #2847 criada</span></div>
+          <div class="tl"><span class="tok">[03:42] ✓✓✓ CONCLUÍDO — 0 erros · 0 chamados</span></div>
+          <div class="tl"><span class="tp">$</span><span class="tcursor"></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="fc rv" style="transition-delay:.1s">
+      <div class="fiw">🔐</div>
+      <div class="ft">Perfis de Acesso Inteligentes</div>
+      <p class="fdesc">Cada cargo tem um perfil pré-configurado. Dev recebe repositórios e dev/staging. Designer recebe Figma e drive de assets. Gerente recebe painel de gestão. Tudo automático e auditável.</p>
+      <div class="fmet">> 6 PERFIS PADRÃO · RBAC · CUSTOMIZÁVEL</div>
+    </div>
+    <div class="fc rv" style="transition-delay:.2s">
+      <div class="fiw">📊</div>
+      <div class="ft">Auditoria & Conformidade Total</div>
+      <p class="fdesc">Log imutável de cada provisioning: quem executou, quando, quais sistemas, quanto tempo. Relatórios exportáveis para auditoria, compliance e ISO 27001.</p>
+      <div class="fmet">> LOG COMPLETO · EXPORT CSV · RELATÓRIOS</div>
+    </div>
+    <div class="fc rv" style="transition-delay:.3s">
+      <div class="fiw">🔌</div>
+      <div class="ft">Integrações Nativas</div>
+      <p class="fdesc">OAuth2, LDAP, REST APIs. Conecta com qualquer sistema via protocolo padrão. Adicione novos conectores em minutos com nosso sistema de plugins extensível.</p>
+      <div class="fmet">> AD · GWS · SLACK · JIRA · VPN · HR + MAIS</div>
+    </div>
+  </div>
+</section>
+
+<!-- GROWTH -->
+<section id="growth">
+  <div class="rv">
+    <div class="stag">// dados de performance</div>
+    <h2 class="stitle">RESULTADOS <span>COMPROVADOS</span></h2>
+    <p style="color:var(--muted);max-width:500px;margin-top:1rem;font-size:.93rem;line-height:1.7">Empresas que adotaram o AdmissãoAuto eliminaram 100% dos chamados à TI para onboarding e reduziram o tempo de setup em 99%.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3rem">
+    <div>
+      <div style="font-family:var(--fm);font-size:.62rem;color:var(--muted);letter-spacing:2px;margin-bottom:.5rem;text-transform:uppercase">Chamados eliminados por mês</div>
+      <div class="cc" id="lcc">
+        <svg class="csvg" viewBox="0 0 500 250" preserveAspectRatio="none">
+          <defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#39ff14" stop-opacity="0.25"/><stop offset="100%" stop-color="#39ff14" stop-opacity="0"/></linearGradient></defs>
+          <line x1="0" y1="50" x2="500" y2="50" class="cgl"/>
+          <line x1="0" y1="100" x2="500" y2="100" class="cgl"/>
+          <line x1="0" y1="150" x2="500" y2="150" class="cgl"/>
+          <line x1="0" y1="200" x2="500" y2="200" class="cgl"/>
+          <text x="506" y="53" class="clbl">100</text><text x="506" y="103" class="clbl">75</text><text x="506" y="153" class="clbl">50</text><text x="506" y="203" class="clbl">25</text>
+          <path id="ap" class="cap" d="M0,245 L42,230 L84,215 L126,198 L168,178 L210,155 L252,128 L294,98 L336,68 L378,42 L420,22 L462,8 L490,3 L490,245 Z"/>
+          <path id="lp" class="clp" d="M0,245 L42,230 L84,215 L126,198 L168,178 L210,155 L252,128 L294,98 L336,68 L378,42 L420,22 L462,8 L490,3"/>
+          <circle cx="0" cy="245" r="4" class="cdot" id="cd0"/>
+          <circle cx="84" cy="215" r="4" class="cdot" id="cd1"/>
+          <circle cx="168" cy="178" r="4" class="cdot" id="cd2"/>
+          <circle cx="252" cy="128" r="4" class="cdot" id="cd3"/>
+          <circle cx="336" cy="68" r="4" class="cdot" id="cd4"/>
+          <circle cx="420" cy="22" r="4" class="cdot" id="cd5"/>
+          <circle cx="490" cy="3" r="4" class="cdot" id="cd6"/>
+          <text x="0" y="268" class="clbl">Jan</text><text x="70" y="268" class="clbl">Fev</text><text x="148" y="268" class="clbl">Mar</text><text x="230" y="268" class="clbl">Abr</text><text x="310" y="268" class="clbl">Mai</text><text x="392" y="268" class="clbl">Jun</text><text x="468" y="268" class="clbl">Jul</text>
+        </svg>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:var(--fm);font-size:.62rem;color:var(--muted);letter-spacing:2px;margin-bottom:.5rem;text-transform:uppercase">Tempo de setup: dias → minutos</div>
+      <div style="height:200px;display:flex;align-items:flex-end;gap:4px;border-left:1px solid var(--wire);border-bottom:1px solid var(--wire);padding:0 4px;margin-top:8px" id="barch">
+        <div class="bar" style="height:92%;flex:1" data-d="0"></div>
+        <div class="bar" style="height:85%;flex:1" data-d="80"></div>
+        <div class="bar" style="height:76%;flex:1" data-d="160"></div>
+        <div class="bar" style="height:66%;flex:1" data-d="240"></div>
+        <div class="bar" style="height:55%;flex:1" data-d="320"></div>
+        <div class="bar" style="height:42%;flex:1" data-d="400"></div>
+        <div class="bar" style="height:30%;flex:1" data-d="480"></div>
+        <div class="bar" style="height:19%;flex:1" data-d="560"></div>
+        <div class="bar" style="height:11%;flex:1" data-d="640"></div>
+        <div class="bar" style="height:6%;flex:1;background:linear-gradient(180deg,var(--lime),var(--g2))" data-d="720"></div>
+        <div class="bar" style="height:3%;flex:1;background:linear-gradient(180deg,var(--acid),var(--g2))" data-d="800"></div>
+        <div class="bar" style="height:1.5%;flex:1;background:linear-gradient(180deg,var(--acid),var(--g2));box-shadow:0 0 20px var(--glow)" data-d="880"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-family:var(--fm);font-size:.6rem;color:var(--muted);margin-top:.3rem"><span>Jan (3 dias)</span><span>Hoje (4 min)</span></div>
+    </div>
+  </div>
+  <div class="cstats rv" id="cstats">
+    <div class="cst"><span class="csn"><span class="counter" data-target="2847">0</span></span><span class="csl">Admissões automatizadas</span></div>
+    <div class="cst"><span class="csn"><span class="counter" data-target="14235">0</span></span><span class="csl">Chamados evitados</span></div>
+    <div class="cst"><span class="csn"><span class="counter" data-target="98">0</span>%</span><span class="csl">Precisão média</span></div>
+    <div class="cst"><span class="csn"><span class="counter" data-target="4">0</span> min</span><span class="csl">Tempo médio de setup</span></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="rv">
+    <div class="stag">// planos e investimento</div>
+    <h2 class="stitle">ESCOLHA SEU<br><span>PLANO DE OPERAÇÃO</span></h2>
+  </div>
+  <div class="pg">
+    <div class="pc rv" style="transition-delay:.1s">
+      <div class="ptag">// nível básico</div>
+      <div class="pname">Starter</div>
+      <div class="pprice"><span class="pcur">R$</span><span class="pamt">297</span><span class="pper">/mês</span></div>
+      <p class="pdesc">Para startups e pequenas empresas que precisam automatizar o onboarding sem complexidade.</p>
+      <ul class="pf">
+        <li>Até 20 admissões/mês</li><li>3 sistemas integrados</li><li>Formulário multi-step</li><li>Dashboard básico</li><li>Suporte por e-mail</li>
+        <li class="off">Provisioning paralelo</li><li class="off">Auditoria avançada</li><li class="off">API personalizada</li>
+      </ul>
+      <button class="pbtn">Começar agora</button>
+    </div>
+    <div class="pc fp rv" style="transition-delay:.2s">
+      <div class="ptag">// nível operacional</div>
+      <div class="pname">Operator</div>
+      <div class="pprice"><span class="pcur">R$</span><span class="pamt">797</span><span class="pper">/mês</span></div>
+      <p class="pdesc">Para empresas em crescimento que precisam de automação completa e zero gargalos no onboarding.</p>
+      <ul class="pf">
+        <li>Admissões ilimitadas</li><li>6 sistemas integrados</li><li>Provisioning paralelo</li><li>Dashboard + auditoria</li><li>Notificações automáticas</li><li>Suporte prioritário</li><li>Relatórios avançados</li>
+        <li class="off">API personalizada</li>
+      </ul>
+      <button class="pbtn">Ativar operação</button>
+    </div>
+    <div class="pc rv" style="transition-delay:.3s">
+      <div class="ptag">// nível enterprise</div>
+      <div class="pname">Command</div>
+      <div class="pprice"><span class="pcur">R$</span><span class="pamt">1.997</span><span class="pper">/mês</span></div>
+      <p class="pdesc">Para corporações que precisam de controle total, SLA garantido e integrações customizadas.</p>
+      <ul class="pf">
+        <li>Tudo do Operator</li><li>Sistemas ilimitados</li><li>API personalizada</li><li>SSO / SAML 2.0</li><li>SLA 99.99%</li><li>Suporte 24/7</li><li>Deploy on-premise</li><li>CSM dedicado</li>
+      </ul>
+      <button class="pbtn">Contato comercial</button>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testi">
+  <div class="rv">
+    <div class="stag">// registros de campo</div>
+    <h2 class="stitle">O QUE DIZEM OS<br><span>OPERADORES</span></h2>
+  </div>
+  <div class="tg">
+    <div class="tc2 rv" style="transition-delay:.1s">
+      <div class="tstars">★★★★★</div>
+      <p class="ttxt">Era 2 dias úteis de espera pela TI para cada novo dev. Hoje é 4 minutos. A TI nem sabe que a pessoa entrou até ver o log.</p>
+      <div class="tauth"><div class="tav">CM</div><div><div class="tname">Carlos Mendes</div><div class="trole">CTO · Fintech // São Paulo</div></div></div>
+    </div>
+    <div class="tc2 rv" style="transition-delay:.2s">
+      <div class="tstars">★★★★★</div>
+      <p class="ttxt">Onboardamos 47 pessoas em um mês sem abrir um único chamado. A TI finalmente consegue focar em infra e segurança.</p>
+      <div class="tauth"><div class="tav">AP</div><div><div class="tname">Ana Paula Reis</div><div class="trole">Head RH · Scale-up // Curitiba</div></div></div>
+    </div>
+    <div class="tc2 rv" style="transition-delay:.3s">
+      <div class="tstars">★★★★★</div>
+      <p class="ttxt">O sistema decidiu automaticamente que o novo gerente precisava de acesso ao Jira e VPN. Não precisei configurar nada.</p>
+      <div class="tauth"><div class="tav">RF</div><div><div class="tname">Ricardo Fontes</div><div class="trole">IT Manager · Indústria // RS</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="rv">
+    <div class="stag" style="justify-content:center">// iniciar operação</div>
+    <h2 class="ctitle">ZERO CHAMADOS.<br><span>ZERO ESPERA.</span></h2>
+    <p class="csub">Primeiros 30 dias gratuitos. Sem cartão de crédito. Cancele quando quiser.</p>
+    <div class="cform">
+      <input type="email" class="cinp" placeholder="seu@email.com" id="cemail">
+      <button class="csub2" onclick="ctaSubmit()">Ativar →</button>
+    </div>
+    <div id="ctamsg" style="font-family:var(--fm);font-size:.73rem;color:var(--lime);margin-top:1rem;min-height:1.2em;position:relative;z-index:1"></div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <div class="flogo">AdmissãoAuto</div>
+    <div class="fcp" style="margin-top:.4rem">© 2026 · Automação de admissões · Todos os direitos reservados</div>
+  </div>
+  <div style="font-family:var(--fm);font-size:.62rem;color:var(--wire);text-align:right">
+    <div>BUILD v3.0.0 · 17.03.2026</div>
+    <div style="color:var(--lime);margin-top:.25rem">STATUS: OPERATIONAL ●</div>
+  </div>
+</footer>
+
+<!-- CHATBOT -->
+<div id="cb">
+  <div class="cwin" id="cwin">
+    <div class="chdr">
+      <div class="cst2"></div>
+      <div><div class="cname">AUTO_BOT</div><div class="crole">// assistente de onboarding · online</div></div>
+    </div>
+    <div class="cmsgs" id="cmsgs">
+      <div class="msg bot">Olá. Sou o AUTO_BOT. Como posso ajudar com automação de admissões?</div>
+    </div>
+    <div class="csugg" id="csugg">
+      <button class="sugg" onclick="ss(this)">Como funciona?</button>
+      <button class="sugg" onclick="ss(this)">Ver preços</button>
+      <button class="sugg" onclick="ss(this)">Sistemas?</button>
+      <button class="sugg" onclick="ss(this)">Trial grátis?</button>
+    </div>
+    <div class="cinw">
+      <input class="cinput" id="cinput" placeholder="Digite sua mensagem..." onkeydown="if(event.key==='Enter')sc()">
+      <button class="csend" onclick="sc()">↑</button>
+    </div>
+  </div>
+  <button class="ctog" id="ctog" onclick="tc()" aria-label="Chat">💬</button>
+</div>
+
+<script>
+// BG CANVAS
+const cv=document.getElementById('bgc'),cx2=cv.getContext('2d');
+let W,H,pts=[];
+function rsz(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight}
+rsz();window.addEventListener('resize',rsz);
+for(let i=0;i<100;i++)pts.push({x:Math.random()*3000,y:Math.random()*3000,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.4+.3,o:Math.random()*.5+.1,t:Math.random()>.65?'c':'d'});
+let sy=0;
+function bgLoop(){
+  cx2.clearRect(0,0,W,H);
+  cx2.fillStyle='#000a00';cx2.fillRect(0,0,W,H);
+  // grid
+  cx2.strokeStyle='rgba(0,55,0,.22)';cx2.lineWidth=.5;
+  for(let i=0;i<W/70+1;i++){cx2.beginPath();cx2.moveTo(i*70,0);cx2.lineTo(i*70,H);cx2.stroke()}
+  for(let j=0;j<H/70+1;j++){cx2.beginPath();cx2.moveTo(0,j*70);cx2.lineTo(W,j*70);cx2.stroke()}
+  // scanline
+  sy=(sy+.7)%H;
+  const sg=cx2.createLinearGradient(0,sy-70,0,sy+70);
+  sg.addColorStop(0,'transparent');sg.addColorStop(.5,'rgba(57,255,20,.035)');sg.addColorStop(1,'transparent');
+  cx2.fillStyle=sg;cx2.fillRect(0,sy-70,W,140);
+  // particles
+  pts.forEach(p=>{
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+    cx2.fillStyle=`rgba(57,255,20,${p.o})`;
+    if(p.t==='c'){cx2.fillRect(p.x-3,p.y-.5,6,1);cx2.fillRect(p.x-.5,p.y-3,1,6)}
+    else{cx2.beginPath();cx2.arc(p.x,p.y,p.r,0,Math.PI*2);cx2.fill()}
+  });
+  // connections
+  for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+    const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
+    if(d<110){cx2.strokeStyle=`rgba(57,255,20,${.1*(1-d/110)})`;cx2.lineWidth=.5;cx2.beginPath();cx2.moveTo(pts[i].x,pts[i].y);cx2.lineTo(pts[j].x,pts[j].y);cx2.stroke()}
+  }
+  requestAnimationFrame(bgLoop);
+}
+bgLoop();
+
+// CURSOR
+const cur=document.getElementById('cursor'),cd=document.getElementById('cdot');
+let mx=0,my=0,lx=0,ly=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function aCur(){lx+=(mx-lx)*.12;ly+=(my-ly)*.12;cur.style.left=lx+'px';cur.style.top=ly+'px';cd.style.left=mx+'px';cd.style.top=my+'px';requestAnimationFrame(aCur)})();
+document.querySelectorAll('button,a,.sc,.fc,.pc,.tc2').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cur.style.transform='translate(-50%,-50%) scale(2.5)');
+  el.addEventListener('mouseleave',()=>cur.style.transform='translate(-50%,-50%) scale(1)');
+});
+
+// SCROLL REVEAL
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')}),{threshold:.1});
+document.querySelectorAll('.rv,.rvl,.rvr').forEach(el=>obs.observe(el));
+
+// COUNTERS
+const cobs=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting&&!e.target.dataset.done){
+    e.target.dataset.done='1';
+    const tgt=+e.target.dataset.target,dur=1800,step=tgt/(dur/16);let cur2=0;
+    const t=setInterval(()=>{cur2=Math.min(cur2+step,tgt);e.target.textContent=Math.floor(cur2).toLocaleString('pt-BR');if(cur2>=tgt)clearInterval(t)},16);
+  }
+}),{threshold:.5});
+document.querySelectorAll('.counter').forEach(el=>cobs.observe(el));
+
+// CHART ANIMS
+const chobs=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){
+    document.getElementById('lp').classList.add('anim');
+    document.getElementById('ap').classList.add('anim');
+    document.querySelectorAll('.cdot').forEach((d,i)=>setTimeout(()=>d.classList.add('anim'),i*260));
+    document.querySelectorAll('.bar').forEach(b=>setTimeout(()=>b.classList.add('anim'),+(b.dataset.d||0)));
+    chobs.disconnect();
+  }
+}),{threshold:.15});
+const lcc=document.getElementById('lcc');if(lcc)chobs.observe(lcc);
+
+// CHATBOT
+const RESP={
+  'como funciona?':'O RH preenche um formulário de 4 etapas. O sistema seleciona automaticamente os sistemas por cargo e provisiona tudo em paralelo em menos de 5 minutos. Sem chamados à TI.',
+  'ver preços':'Temos 3 planos:\n> STARTER R$297/mês — 20 admissões, 3 sistemas\n> OPERATOR R$797/mês — ilimitado, 6 sistemas, paralelo\n> COMMAND R$1.997/mês — enterprise, API, SLA 99.99%',
+  'sistemas?':'Integramos com: AD, Google Workspace, Slack, Jira/Azure DevOps, Sistema de RH e VPN. Novos conectores: Figma, HubSpot, GitHub.',
+  'trial grátis?':'Sim! 30 dias grátis, sem cartão. Clique em "Começar grátis" ou insira seu e-mail no formulário. Setup em menos de 5 minutos.',
+};
+const DEF='Para mais detalhes, nosso time pode ajudar. Clique em "Começar grátis" para começar hoje.';
+function tc(){const w=document.getElementById('cwin'),t=document.getElementById('ctog'),o=!w.classList.contains('open');w.classList.toggle('open',o);t.textContent=o?'✕':'💬'}
+function am(txt,type){const d=document.getElementById('cmsgs'),m=document.createElement('div');m.className='msg '+type;m.textContent=txt;d.appendChild(m);d.scrollTop=d.scrollHeight;return m}
+function ss(btn){am(btn.textContent,'user');document.getElementById('csugg').style.display='none';const q=btn.textContent.toLowerCase();setTimeout(()=>{const ty=am('','bot typing');setTimeout(()=>{ty.className='msg bot';ty.textContent=RESP[q]||DEF},850)},250)}
+function sc(){const inp=document.getElementById('cinput'),v=inp.value.trim();if(!v)return;am(v,'user');inp.value='';document.getElementById('csugg').style.display='none';const k=Object.keys(RESP).find(r=>v.toLowerCase().includes(r.replace('?','').split(' ')[0]));setTimeout(()=>{const ty=am('','bot typing');setTimeout(()=>{ty.className='msg bot';ty.textContent=RESP[k]||DEF},850)},200)}
+function ctaSubmit(){const e=document.getElementById('cemail'),m=document.getElementById('ctamsg');if(e.value&&e.value.includes('@')){m.style.color='var(--lime)';m.textContent='> ACESSO LIBERADO. Verifique seu e-mail em instantes.';e.value=''}else{m.style.color='var(--amber)';m.textContent='> ERRO: insira um e-mail válido.'}}
+</script>
+</body>
+</html>
