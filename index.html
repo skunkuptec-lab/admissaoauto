@@ -198,6 +198,96 @@ footer{padding:2.5rem 4rem;border-top:1px solid var(--wire);display:grid;grid-te
 .sugg:hover{border-color:var(--lime);color:var(--lime)}
 .cinw{display:flex;border-top:1px solid var(--wire)}
 .cinput{flex:1;background:transparent;border:none;padding:.75rem 1rem;font-family:var(--fm);font-size:.73rem;color:var(--lime);outline:none}
+
+/* ── MOBILE RESPONSIVE ─────────────────────────────────────────────────── */
+@media(max-width:768px){
+  /* hide cursor on touch */
+  body{cursor:auto}
+  #cursor,#cdot{display:none}
+
+  /* nav */
+  nav{padding:.75rem 1.25rem}
+  .nlinks{display:none}
+  .ncta{padding:.4rem 1rem;font-size:.65rem;cursor:pointer}
+
+  /* marquee */
+  .marquee-bar{top:52px}
+  .mqi{font-size:.6rem;letter-spacing:2px}
+
+  /* sections */
+  section{padding:5rem 1.25rem 3rem;min-height:auto}
+
+  /* hero */
+  #hero{padding-top:7rem;min-height:100vh}
+  .htag{font-size:.6rem;letter-spacing:2px}
+  .htitle{font-size:clamp(3rem,13vw,5rem);letter-spacing:-1px;margin-bottom:1.25rem}
+  .hsub{font-size:.95rem;margin-bottom:2rem}
+  .hbtns{flex-direction:column;align-items:flex-start;gap:.75rem}
+  .btn-p{padding:.8rem 2rem;font-size:.9rem;cursor:pointer}
+  .btn-g{cursor:pointer}
+  /* stats move below content on mobile */
+  .hstats{position:static;transform:none;flex-direction:row;flex-wrap:wrap;gap:1.5rem;margin-top:2.5rem;opacity:1;animation:none}
+  .sitem{text-align:left;border-right:none;border-left:2px solid var(--lime);padding-right:0;padding-left:.75rem}
+  .snum{font-size:2.2rem}
+  .scroll-h{display:none}
+
+  /* how */
+  #how{padding:4rem 1.25rem}
+  .steps{grid-template-columns:1fr 1fr}
+  .sc{padding:1.75rem 1.25rem}
+  .sn{font-size:3.5rem}
+
+  /* features */
+  #features{padding:4rem 1.25rem}
+  .fg{grid-template-columns:1fr}
+  .fc{padding:2rem 1.5rem}
+  .fc.featured{grid-column:span 1;grid-template-columns:1fr;gap:1.5rem}
+  .term{font-size:.7rem;padding:1.25rem}
+
+  /* growth */
+  #growth{padding:4rem 1.25rem}
+  #growth > div[style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column;gap:2rem}
+  .cc{height:200px}
+  .cstats{grid-template-columns:1fr 1fr}
+  .csn{font-size:2rem}
+
+  /* pricing */
+  #pricing{padding:4rem 1.25rem}
+  .pg{grid-template-columns:1fr}
+  .pc{padding:2rem 1.75rem}
+  .pbtn{cursor:pointer}
+
+  /* testimonials */
+  #testi{padding:4rem 1.25rem}
+  .tg{grid-template-columns:1fr}
+  .tc2{padding:2rem 1.5rem}
+
+  /* cta */
+  #cta{padding:4rem 1.25rem}
+  .ctitle{font-size:clamp(2.5rem,10vw,4rem)}
+  .cform{flex-direction:column;gap:0}
+  .cinp{border-right:1px solid var(--wire);border-bottom:none}
+  .csub2{cursor:pointer;padding:.9rem}
+
+  /* footer */
+  footer{padding:2rem 1.25rem;grid-template-columns:1fr;gap:1rem}
+
+  /* chatbot */
+  .cwin{width:calc(100vw - 2rem);right:-1rem;bottom:70px}
+  .ctog{cursor:pointer}
+  .sugg{cursor:pointer}
+  .csend{cursor:pointer}
+}
+
+@media(max-width:480px){
+  .htitle{font-size:clamp(2.5rem,14vw,4rem)}
+  .steps{grid-template-columns:1fr}
+  .cstats{grid-template-columns:1fr 1fr}
+  .hstats{gap:1rem}
+  .snum{font-size:2rem}
+  nav{padding:.65rem 1rem}
+  .nlogo{font-size:1.3rem}
+}
 .cinput::placeholder{color:var(--wire)}
 .csend{background:var(--lime);border:none;width:44px;color:#000;font-size:1rem;cursor:none;transition:background .2s}
 .csend:hover{background:var(--acid)}
@@ -508,9 +598,11 @@ footer{padding:2.5rem 4rem;border-top:1px solid var(--wire);display:grid;grid-te
 // BG CANVAS
 const cv=document.getElementById('bgc'),cx2=cv.getContext('2d');
 let W,H,pts=[];
+const isMobile=window.innerWidth<=768;
 function rsz(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight}
 rsz();window.addEventListener('resize',rsz);
-for(let i=0;i<100;i++)pts.push({x:Math.random()*3000,y:Math.random()*3000,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.4+.3,o:Math.random()*.5+.1,t:Math.random()>.65?'c':'d'});
+const ptCount=isMobile?35:100;
+for(let i=0;i<ptCount;i++)pts.push({x:Math.random()*3000,y:Math.random()*3000,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.4+.3,o:Math.random()*.5+.1,t:Math.random()>.65?'c':'d'});
 let sy=0;
 function bgLoop(){
   cx2.clearRect(0,0,W,H);
